@@ -3,7 +3,7 @@ __author__ = 'wgz'
 __date__ = '2018/1/10 15:44'
 
 import requests
-
+from retry import retry
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -17,6 +17,7 @@ news_page_num = raw_input('请输入从第几页获取新闻：')
 news_num = raw_input('请输入要获取的新闻条数：')
 # news_type = raw_input('请输入要获取的新闻类型(XX新闻)：')
 # 对新闻提取首字母
+@retry(tries=3)
 def multi_get_letter(str_input):
   if isinstance(str_input, unicode):
     unicode_str = str_input
